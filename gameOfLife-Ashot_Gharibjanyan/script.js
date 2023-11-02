@@ -86,6 +86,7 @@ var waterArr = []
 var tixmArr = []
 
 function setup() {
+    console.log("Hallo World" )
     frameRate(10)
     createCanvas(matrix[0].length * side ,matrix.length * side)
    
