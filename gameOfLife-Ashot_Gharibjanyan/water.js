@@ -49,7 +49,7 @@ class Water {
     mul() {
         let emptyCell = this.chooseCell(0);
         let newCell = random(emptyCell)
-       console.log(this.energy + "energya");
+      
         if (newCell ) {
             let newX = newCell[0];
             let newY = newCell[1];

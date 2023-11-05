@@ -1,6 +1,5 @@
 function matrixGenerator(matrixSize,grass,grassEater,predator,water,tixm) {
     var matrix = []
-
     for (let i = 0; i < matrixSize; i++) {
         matrix.push([])
         for (let j = 0; j < matrixSize; j++) {
@@ -86,7 +85,7 @@ var waterArr = []
 var tixmArr = []
 
 function setup() {
-    console.log("Hallo World" )
+   
     frameRate(10)
     createCanvas(matrix[0].length * side ,matrix.length * side)
    
@@ -170,7 +169,7 @@ function draw() {
    for(let i in predatorArr){
        predatorArr[i].eat()
    }
-console.log(waterArr.length);
+
    for(let i in waterArr){
       waterArr[i].eat()
   }
@@ -182,3 +181,24 @@ console.log(waterArr.length);
   
   
 }
+
+// let student = {
+//     name:"Ashot",
+//     age:15,
+//     isTumoStudent:true,
+
+//     showInfo(){
+
+//         console.log(this.name,this.age)
+//     }
+// }
+// student.showInfo()
+
+ //et erexa = new Child("Ashot", 15, "male");
+// erexa.jump()
+
+// erexa.speak()
+
+// erexa.walk()
+
+// console.log(erexa.name, erexa.gen);
