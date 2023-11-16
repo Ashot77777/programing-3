@@ -1,13 +1,11 @@
-class Predator{
-      constructor(x,y){
-                this.x = x
-                this.y = y
-                this.energy = 12
-                this.directions = []
-      }
+let LivingCreature = require('./LivingCreature')
 
-
-      getNewCoordinates() {
+module.exports = class GrassEater extends LivingCreature{
+    constructor(x, y) {
+    super(x,y)
+        this.energy = 10;
+    }
+    getNewCoordinates() {
         this.directions = [
             [this.x - 1, this.y - 1],
             [this.x, this.y - 1],
@@ -19,52 +17,30 @@ class Predator{
             [this.x + 1, this.y + 1]
         ];
     }
-    chooseCell(char,char1) {
+    chooseCell(char) {
         this.getNewCoordinates();
-        let found = [];
-
-        for (let i in this.directions) {
-            let x = this.directions[i][0];
-            let y = this.directions[i][1];
-
-            if (y < matrix.length && y >= 0 && x < matrix[0].length && x >= 0) {
-                if (matrix[y][x] == char) {
-                    found.push(this.directions[i]);
-                }
-            }
-
-            if (y < matrix.length && y >= 0 && x < matrix[0].length && x >= 0) {
-                if (matrix[y][x] == char1) {
-                    found.push(this.directions[i]);
-                }
-            }
-
-            
-        }
-
-        return found;
+        return super.chooseCell(char)
     }
-
-
+    //բազմանալ
     mul() {
         let emptyCell = this.chooseCell(0);
         let newCell = random(emptyCell)
-   
         if (newCell && this.energy > 5) {
             let newX = newCell[0];
             let newY = newCell[1];
 
-            let pred = new Predator(newX, newY);
-            matrix[newY][newX] = 3;
-           predatorArr.push(pred);
+            let grEat = new GrassEater(newX, newY);
+            matrix[newY][newX] = 2;
+            grassEaterArr.push(grEat);
 
-            this.energy = 12;
+            this.energy = 10;
         }
     }
 
 
+//ուտել
     eat() {
-        let emptyCell = this.chooseCell(1,2);
+        let emptyCell = this.chooseCell(1);
         let newCell = random(emptyCell)
 
         if (newCell) {
@@ -79,19 +55,13 @@ class Predator{
                 }
             }
 
-            for (let i = 0; i < grassEaterArr.length; i++) {
-                if (grassEaterArr[i].x == newX && grassEaterArr[i].y == newY) {
-                    grassEaterArr.splice(i, 1)
-                    break;
-                }
-            }
-            matrix[newY][newX] = 3;
+            matrix[newY][newX] = 2;
             matrix[this.y][this.x] = 0;
 
             this.x = newX;
             this.y = newY;
 
-            if (this.energy > 20) {
+            if (this.energy > 30) {
                 this.mul()
             }
         } 
@@ -103,6 +73,7 @@ class Predator{
         }
     }
 
+    //քայլել
     move() {
         let emptyCell = this.chooseCell(0);
         let newCell = random(emptyCell)
@@ -111,7 +82,7 @@ class Predator{
             let newX = newCell[0];
             let newY = newCell[1];
 
-            matrix[newY][newX] = 3;
+            matrix[newY][newX] = 2;
             matrix[this.y][this.x] = 0;
 
            
@@ -126,12 +97,14 @@ class Predator{
         } 
     }
 
+
     die() {
-        for (let i = 0; i < predatorArr.length; i++) {
-            if (predatorArr[i].x == this.x && predatorArr[i].y == this.y) {
-               predatorArr.splice(i, 1)
+        for (let i = 0; i < grassEaterArr.length; i++) {
+            if (grassEaterArr[i].x == this.x && grassEaterArr[i].y == this.y) {
+                grassEaterArr.splice(i, 1)
             }
         }
         matrix[this.y][this.x] = 0;
     }
 }
+

@@ -1,22 +1,11 @@
-function matrixGenerator(matrixSize,grass,grassEater,predator,water,tixm) {
-    var matrix = []
-    for (let i = 0; i < matrixSize; i++) {
-        matrix.push([])
-        for (let j = 0; j < matrixSize; j++) {
-        matrix[i].push(0)
-        
-        }
-    }
-
-
-    for (let i = 0; i < grass; i++) {
+for (let i = 0; i < grass; i++) {
         
         var x = Math.floor(Math.random() * matrixSize)
         var y = Math.floor(Math.random() * matrixSize)
        
         matrix[y][x] = 1
         
-    }
+}
 
     for (let i = 0; i < grassEater; i++) {
         
@@ -64,7 +53,7 @@ function matrixGenerator(matrixSize,grass,grassEater,predator,water,tixm) {
 
     return matrix
 
-}
+
 
 
 
@@ -112,8 +101,8 @@ function setup() {
         
     }
 
+ }
 }
-
 
 
 function draw() {
