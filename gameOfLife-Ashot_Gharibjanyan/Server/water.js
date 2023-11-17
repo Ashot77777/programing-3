@@ -1,12 +1,12 @@
-let LivingCreature = require('./LivingCreature')
+let LivingCreature = require('./livingCreature')
 
-module.exports = class Water extends LivingCreature{
+module.exports = class Water extends LivingCreature {
     constructor(x, y) {
-       // this.x = x
-      //  this.y = y
-      super(x,y)
+        // this.x = x
+        //  this.y = y
+        super(x, y)
         this.energy = 50
-       // this.directions = []
+        // this.directions = []
     }
 
 
@@ -55,8 +55,8 @@ module.exports = class Water extends LivingCreature{
     mul() {
         let emptyCell = this.chooseCell(0);
         let newCell = random(emptyCell)
-      
-        if (newCell ) {
+
+        if (newCell) {
             let newX = newCell[0];
             let newY = newCell[1];
 
@@ -71,7 +71,7 @@ module.exports = class Water extends LivingCreature{
 
     eat() {
 
-        let emptyCell = this.chooseCell(2,3);
+        let emptyCell = this.chooseCell(2, 3);
         let newCell = random(emptyCell)
         if (newCell) {
             this.energy += 5;
@@ -101,9 +101,9 @@ module.exports = class Water extends LivingCreature{
             this.x = newX;
             this.y = newY;
 
-                this.mul()
+            this.mul()
         }
-        else{
+        else {
             this.move()
         }
 

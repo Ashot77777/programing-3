@@ -1,4 +1,4 @@
-let LivingCreature = require('./LivingCreature')
+let LivingCreature = require('./livingCreature')
 
 module.exports = class LivingCreature {
         constructor(x, y) {
@@ -18,7 +18,7 @@ module.exports = class LivingCreature {
 
 
         }
-        chooseCell(char, ) {
+        chooseCell(char,char1,char2,char3,char4) {
                 let found = []
 
                 for (let i in this.directions) {

@@ -1,11 +1,11 @@
 let LivingCreature = require('./livingCreature')
 
-module.exports = class Tixm extends LivingCreature {
+module.exports = class Arev extends LivingCreature {
     constructor(x, y) {
         // this.x = x
         //this.y = y
         super(x, y)
-        this.energy = 12
+        this.energy = 10
         //this.directions = []
     }
 
@@ -22,7 +22,7 @@ module.exports = class Tixm extends LivingCreature {
     //     [this.x + 1, this.y + 1]
     // ];
     // }
-    chooseCell(char) {
+    chooseCell(char,char1,char2,char3,char4) {
         this.getNewCoordinates();
         return super.chooseCell(char)
     }
@@ -52,26 +52,47 @@ module.exports = class Tixm extends LivingCreature {
         let emptyCell = this.chooseCell(0);
         let newCell = random(emptyCell)
 
-        if (newCell && this.energy > 12) {
+        if (newCell && this.energy > 10) {
             let newX = newCell[0];
             let newY = newCell[1];
 
-            matrix[newY][newX] = 5;
-            let tixm = new Tixm(newX, newY);
-            tixmArr.push(tixm);
+            matrix[newY][newX] = 6;
+            let arev = new Arev(newX, newY);
+            arevArr.push(arevArr);
 
-            this.energy = 12;
+            this.energy = 10;
         }
     }
 
 
     eat() {
-        let emptyCell = this.chooseCell(4);
+        let emptyCell = this.chooseCell(1, 2, 3, 4, 5);
         let newCell = random(emptyCell)
         if (newCell) {
             this.energy += 5;
             let newX = newCell[0];
             let newY = newCell[1];
+
+            for (let i = 0; i < grassArr; i++) {
+                if (grassArr[i].x == newX && grassArr[i].y == newY) {
+                   grassArr.splice(i, 1)
+                    break;
+                }
+            }
+
+            for (let i = 0; i < grassEaterArr.length; i++) {
+                if (grassEaterArr[i].x == newX && grassEaterArr[i].y == newY) {
+                   grassEaterArr.splice(i, 1)
+                    break;
+                }
+            }
+
+            for (let i = 0; i <predatorArr.length; i++) {
+                if (predatorArr[i].x == newX && predatorArr[i].y == newY) {
+                  predatorArr.splice(i, 1)
+                    break;
+                }
+            }
 
             for (let i = 0; i < waterArr.length; i++) {
                 if (waterArr[i].x == newX && waterArr[i].y == newY) {
@@ -80,14 +101,20 @@ module.exports = class Tixm extends LivingCreature {
                 }
             }
 
+            for (let i = 0; i < tixmArr.length; i++) {
+                if (tixmArr[i].x == newX && tixmArr[i].y == newY) {
+                    tixmArrr.splice(i, 1)
+                    break;
+                }
+            }
 
-            matrix[newY][newX] = 5;
+            matrix[newY][newX] = 6;
             matrix[this.y][this.x] = 0;
 
             this.x = newX;
             this.y = newY;
 
-            if (this.energy > 12) {
+            if (this.energy > 10) {
                 this.mul()
             }
         }
@@ -109,7 +136,7 @@ module.exports = class Tixm extends LivingCreature {
             let newX = newCell[0];
             let newY = newCell[1];
 
-            matrix[newY][newX] = 5;
+            matrix[newY][newX] = 6;
             matrix[this.y][this.x] = 0;
 
 
@@ -131,9 +158,9 @@ module.exports = class Tixm extends LivingCreature {
     die() {
 
 
-        for (let i = 0; i < tixmArr.length; i++) {
-            if (tixmArr[i].x == this.x && tixmArr[i].y == this.y) {
-                tixmArr.splice(i, 1)
+        for (let i = 0; i < arevArr.length; i++) {
+            if (arevArr[i].x == this.x && arevArr[i].y == this.y) {
+              arevArr.splice(i, 1)
             }
         }
         matrix[this.y][this.x] = 0;
