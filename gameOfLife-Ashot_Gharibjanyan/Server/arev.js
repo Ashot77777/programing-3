@@ -66,7 +66,7 @@ module.exports = class Arev extends LivingCreature {
 
 
     eat() {
-        let emptyCell = this.chooseCell(1, 2, 3, 4, 5);
+        let emptyCell = this.chooseCell(1, 2, 3, 4, 5, 7);
         let newCell = random(emptyCell)
         if (newCell) {
             this.energy += 5;
@@ -104,6 +104,13 @@ module.exports = class Arev extends LivingCreature {
             for (let i = 0; i < tixmArr.length; i++) {
                 if (tixmArr[i].x == newX && tixmArr[i].y == newY) {
                     tixmArrr.splice(i, 1)
+                    break;
+                }
+            }
+
+            for (let i = 0; i < dzunArr.length; i++) {
+                if (dzunArr[i].x == newX && dzunArr[i].y == newY) {
+                    dzunArr.splice(i, 1)
                     break;
                 }
             }
