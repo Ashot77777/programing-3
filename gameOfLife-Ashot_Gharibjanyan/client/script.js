@@ -57,21 +57,21 @@ for (let i = 0; i < arev; i++) {
 
 }
 
+for (let i = 0; i < dzun; i++) {
+
+    let x = Math.floor(Math.random() * matrixSize)
+    let y = Math.floor(Math.random() * matrixSize)
+
+    matrix[y][x] = 7
+
+
+}
 
 
 return matrix
 
 
-
-
-
-
-
-
-
-
-
-let matrix = matrixGenerator(30, 40, 15, 20, 30, 10, 12)
+let matrix = matrixGenerator(20, 25, 30, 35, 40, 45, 50, 55, 60)
 let side = 25
 
 
@@ -81,6 +81,7 @@ let predatorArr = []
 let waterArr = []
 let tixmArr = []
 let arevArr = []
+let dzunArr = []
 
 
 function setup() {
@@ -109,6 +110,9 @@ function setup() {
             } else if (matrix[y][x] == 6) {
                 let arev = new Arev(x, y)
                 arevArr.push(arev)
+            }else if (matrix[y][x] == 7) {
+                let dzun = new Dzun(x, y)
+               dzunArr.push(dzun)
             }
         }
 
@@ -155,10 +159,16 @@ function draw() {
                 rect(x * side, y * side, side, side);
                 text('☀️', x * side, y * side + toBot);
 
-            } else {
+            }else if (matrix[y][x] == 7) {
+                fill("white")
+                rect(x * side, y * side, side, side);
+                text('❄️', x * side, y * side + toBot);
+
+            }else {
                 fill("gray")
                 rect(x * side, y * side, side, side)
             }
+             
 
 
 
@@ -189,6 +199,10 @@ function draw() {
         for (let i in arevArr) {
             arevArr[i].eat()
         }
+        for (let i in dzunArr) {
+            dzunArr[i].eat()
+        }
+        
     }
 }
 

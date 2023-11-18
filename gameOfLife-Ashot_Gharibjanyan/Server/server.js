@@ -14,7 +14,7 @@ server.listen(3000, () => {
     console.log('connected');
 });
 
-function matrixGenerator(matrixSize, grass, grassEater, predator, water, tixm) {
+function matrixGenerator(matrixSize, grass, grassEater, predator, water, tixm, arev, dzun) {
     var matrix = []
     for (let i = 0; i < matrixSize; i++) {
         matrix.push([])
@@ -32,6 +32,8 @@ function matrixGenerator(matrixSize, grass, grassEater, predator, water, tixm) {
     predatorArr = [];
     waterArr = [];
     tixmArr = [];
+    arevArr = [];
+    dzunArr = [];
 
 
     Grass = require("./grass")
@@ -39,6 +41,8 @@ function matrixGenerator(matrixSize, grass, grassEater, predator, water, tixm) {
     Predator = require("./predator")
     Water = require("./water")
     Tixm = require("./tixm")
+    Arev = require("./arev")
+    Dzun = require("./dzun")
 
     function createObject(matrix) {
         for (let y = 0; y < matrix.length; y++) {
@@ -67,6 +71,16 @@ function matrixGenerator(matrixSize, grass, grassEater, predator, water, tixm) {
                     tixmArr.push(tixm)
 
                 }
+                else if (matrix[y][x] == 6) {
+                    let arev = new Arev(x, y, 6);
+                    arevArr.push(arev)
+
+                }
+                else if (matrix[y][x] == 7) {
+                    let dzun = new Dzun(x, y, 7);
+                    dzunArr.push(dzun)
+
+                }
             }
         }
 
@@ -91,6 +105,12 @@ function matrixGenerator(matrixSize, grass, grassEater, predator, water, tixm) {
         }
         for (let i in tixmArr) {
             tixmArr[i].eat();
+        }
+        for (let i in arevArr) {
+            arevArr[i].eat();
+        }
+        for (let i in dzunArr) {
+            dzunArr[i].eat();
         }
 
         io.sockets.emit("send matrix", matrix);
