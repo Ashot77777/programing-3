@@ -10,18 +10,18 @@ module.exports = class Tixm extends LivingCreature {
     }
 
 
-    // getNewCoordinates() {   
-    // this.directions = [
-    //     [this.x - 1, this.y - 1],
-    //     [this.x, this.y - 1],
-    //     [this.x + 1, this.y - 1],
-    //     [this.x - 1, this.y],
-    //     [this.x + 1, this.y],
-    //     [this.x - 1, this.y + 1],
-    //     [this.x, this.y + 1],
-    //     [this.x + 1, this.y + 1]
-    // ];
-    // }
+    getNewCoordinates() {   
+    this.directions = [
+        [this.x - 1, this.y - 1],
+        [this.x, this.y - 1],
+        [this.x + 1, this.y - 1],
+        [this.x - 1, this.y],
+        [this.x + 1, this.y],
+        [this.x - 1, this.y + 1],
+        [this.x, this.y + 1],
+        [this.x + 1, this.y + 1]
+    ];
+    }
     chooseCell(char) {
         this.getNewCoordinates();
         return super.chooseCell(char)
@@ -49,84 +49,71 @@ module.exports = class Tixm extends LivingCreature {
 
 
     mul() {
-        let emptyCell = this.chooseCell(0);
-        let newCell = random(emptyCell)
-
-        if (newCell && this.energy > 12) {
-            let newX = newCell[0];
-            let newY = newCell[1];
-
-            matrix[newY][newX] = 5;
-            let tixm = new Tixm(newX, newY);
-            tixmArr.push(tixm);
-
-            this.energy = 12;
+        this.multiply++;
+        if (this.multiply >= 3) {
+            let emptyCells = super.chooseCell(0)
+          
+            let newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
+            
+            if (this.multiply >= 5 && newCell) {
+                let x = newCell[0]
+                let y = newCell[1]
+                let tx = new Tixm(x, y, 5)
+             tixmArr.push(tx)
+                this.multiply = 0;
+            }
         }
     }
 
 
     eat() {
-        let emptyCell = this.chooseCell(4);
-        let newCell = random(emptyCell)
+        let grassCells = super.chooseCell(1);
+        let newCell = grassCells[Math.floor(Math.random() * grassCells.length)]
+    
         if (newCell) {
-            this.energy += 5;
+    
             let newX = newCell[0];
             let newY = newCell[1];
-
-            for (let i = 0; i < waterArr.length; i++) {
-                if (waterArr[i].x == newX && waterArr[i].y == newY) {
-                    waterArr.splice(i, 1)
-                    break;
-                }
-            }
-
-
-            matrix[newY][newX] = 5;
+    
+            matrix[newY][newX] = matrix[this.y][this.x];
             matrix[this.y][this.x] = 0;
-
+    
             this.x = newX;
             this.y = newY;
-
-            if (this.energy > 12) {
-                this.mul()
+            this.energy++;
+    
+            if (this.energy >= 12) {
+                console.log(this.energy);
+                this.mul();
             }
+    
         }
-
-
-
         else {
-            this.move()
+            this.move();
         }
     }
-
 
     move() {
-
-        let emptyCell = this.chooseCell(0);
-        let newCell = random(emptyCell)
-
+        let emptyCells = super.chooseCell(0);
+        let newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
+    
         if (newCell) {
             let newX = newCell[0];
             let newY = newCell[1];
-
-            matrix[newY][newX] = 5;
+    
+            matrix[newY][newX] = matrix[this.y][this.x];
             matrix[this.y][this.x] = 0;
-
-
+    
             this.x = newX;
-            this.y = newY;
-
-            this.energy--
-
-            if (this.energy < 0) {
-                this.die()
-            }
+            this.y = newY
         }
-
-
-
-
+    
+        this.energy--;
+        if (this.energy <= 0) {
+            this.die();
+        }
     }
+
 
     die() {
 

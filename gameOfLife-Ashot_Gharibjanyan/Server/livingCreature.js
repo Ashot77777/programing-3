@@ -1,5 +1,3 @@
-let LivingCreature = require('./livingCreature')
-
 module.exports = class LivingCreature {
         constructor(x, y) {
                 this.x = x;
@@ -25,19 +23,12 @@ module.exports = class LivingCreature {
                         var x = this.directions[i][0]
                         var y = this.directions[i][1]
                         if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                                if (matrix[y][x] == char) {
+                                if (matrix[y][x] == char || matrix[y][x] == char1 || matrix[y][x] == char2 || matrix[y][x] == char3 || matrix[y][x] == char4) {
                                         found.push(this.directions[i])
                                 }
                         }
                 }
-                if (y < matrix.length && y >= 0 && x < matrix[0].length && x >= 0) {
-                        if (matrix[y][x] == char1) {
-                                found.push(this.directions[i]);
-                        }
-
-
-                }
-
+                
 
 
                 return found

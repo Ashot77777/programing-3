@@ -2,3 +2,17 @@ body {
     background-size: cover;
     background-image: url("download.png")
 }
+.container {
+    display: flex
+}
+.card {
+    position: relative;
+    left: 0px
+}
+.card:hover {
+    transform: translateY(-20px)
+}
+.card:hover  .card{
+    left: 50px
+}
+    

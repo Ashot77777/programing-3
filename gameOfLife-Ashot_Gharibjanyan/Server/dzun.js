@@ -2,26 +2,25 @@ let LivingCreature = require('./livingCreature')
 
 module.exports = class Dzun extends LivingCreature {
     constructor(x, y) {
-        // this.x = x
-        //this.y = y
+       
         super(x, y)
         this.energy = 15
-        //this.directions = []
+      
     }
 
 
-    // getNewCoordinates() {   
-    // this.directions = [
-    //     [this.x - 1, this.y - 1],
-    //     [this.x, this.y - 1],
-    //     [this.x + 1, this.y - 1],
-    //     [this.x - 1, this.y],
-    //     [this.x + 1, this.y],
-    //     [this.x - 1, this.y + 1],
-    //     [this.x, this.y + 1],
-    //     [this.x + 1, this.y + 1]
-    // ];
-    // }
+    getNewCoordinates() {   
+    this.directions = [
+        [this.x - 1, this.y - 1],
+        [this.x, this.y - 1],
+        [this.x + 1, this.y - 1],
+        [this.x - 1, this.y],
+        [this.x + 1, this.y],
+        [this.x - 1, this.y + 1],
+        [this.x, this.y + 1],
+        [this.x + 1, this.y + 1]
+    ];
+    }
     chooseCell(char3,char4) {
         this.getNewCoordinates();
         return super.chooseCell(char)
@@ -49,90 +48,71 @@ module.exports = class Dzun extends LivingCreature {
 
 
     mul() {
-        let emptyCell = this.chooseCell(0);
-        let newCell = random(emptyCell)
-
-        if (newCell && this.energy > 15) {
-            let newX = newCell[0];
-            let newY = newCell[1];
-
-            matrix[newY][newX] = 7;
-            let dzun = new Dzun(newX, newY);
-            dzunArr.push(dzunArr);
-
-            this.energy = 15;
+        this.multiply++;
+        if (this.multiply >= 3) {
+            let emptyCells = super.chooseCell(0)
+          
+            let newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
+            
+            if (this.multiply >= 5 && newCell) {
+                let x = newCell[0]
+                let y = newCell[1]
+                let dz = new   Dzun(x, y, 7)
+              dzunArr.push(dz)
+                this.multiply = 0;
+            }
         }
     }
 
 
     eat() {
-        let emptyCell = this.chooseCell( 4, 5);
-        let newCell = random(emptyCell)
+        var grassCells = super.chooseCell(1);
+        var newCell = grassCells[Math.floor(Math.random() * grassCells.length)]
+    
         if (newCell) {
-            this.energy += 5;
-            let newX = newCell[0];
-            let newY = newCell[1];
-
-            for (let i = 0; i < waterArr.length; i++) {
-                if (waterArr[i].x == newX && waterArr[i].y == newY) {
-                    waterArr.splice(i, 1)
-                    break;
-                }
-            }
-
-            for (let i = 0; i < tixmArr.length; i++) {
-                if (tixmArr[i].x == newX && tixmArr[i].y == newY) {
-                    tixmArrr.splice(i, 1)
-                    break;
-                }
-            }
-
-            matrix[newY][newX] = 7;
+    
+            var newX = newCell[0];
+            var newY = newCell[1];
+    
+            matrix[newY][newX] = matrix[this.y][this.x];
             matrix[this.y][this.x] = 0;
-
+    
             this.x = newX;
             this.y = newY;
-
-            if (this.energy > 15) {
-                this.mul()
+            this.energy++;
+    
+            if (this.energy >= 15) {
+                console.log(this.energy);
+                this.mul();
             }
+    
         }
-
-
-
         else {
-            this.move()
+            this.move();
         }
     }
-
 
     move() {
-
-        let emptyCell = this.chooseCell(0);
-        let newCell = random(emptyCell)
-
+        var emptyCells = super.chooseCell(0);
+        var newCell = emptyCells[Math.floor(Math.random() * emptyCells.length)]
+    
         if (newCell) {
-            let newX = newCell[0];
-            let newY = newCell[1];
-
-            matrix[newY][newX] = 7;
+            var newX = newCell[0];
+            var newY = newCell[1];
+    
+            matrix[newY][newX] = matrix[this.y][this.x];
             matrix[this.y][this.x] = 0;
-
-
+    
             this.x = newX;
-            this.y = newY;
-
-            this.energy--
-
-            if (this.energy < 0) {
-                this.die()
-            }
+            this.y = newY
         }
-
-
-
-
+    
+        this.energy--;
+        if (this.energy <= 0) {
+            this.die();
+        }
     }
+
 
     die() {
 
