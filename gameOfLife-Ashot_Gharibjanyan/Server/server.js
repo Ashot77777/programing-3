@@ -1,3 +1,4 @@
+const { SSL_OP_MSIE_SSLV2_RSA_PADDING } = require('constants');
 let express = require('express');
 let app = express();
 let server = require('http').Server(app);
@@ -197,7 +198,8 @@ function matrixGenerator(matrixSize, grass, grassEater, predator, water, tixm, a
 
 
 
-    io.on('connection', function () {
-        createObject(matrix)
-    })
+    // io.on('connection', function (socket) {
+    //     createObject(matrix)
+    //     socket.on("Spring", handleSpringClick)
+    // })
 

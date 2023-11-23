@@ -1,18 +1,20 @@
-body {
+* body {
     background-size: cover;
-    background-image: url("download.png")
+    background-image: url("7449.png")
 }
-.container {
-    display: flex
-}
-.card {
-    position: relative;
-    left: 0px
-}
-.card:hover {
-    transform: translateY(-20px)
-}
-.card:hover  .card{
-    left: 50px
-}
+button{
+    background-color:wheat;
+    border-radius: 10cm;
+    box-shadow: chartreuse;
+    box-sizing: 10;
+    padding: 20px 25px;
+    height: 25;
+    color: green;
     
+
+}
+/* a:hover {
+    background-color: yellow;
+    background-color: violet;
+    color: teal;
+} */
