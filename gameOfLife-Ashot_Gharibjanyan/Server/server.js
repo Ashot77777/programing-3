@@ -99,7 +99,7 @@ function matrixGenerator(matrixSize, grass, grassEater, predator, water, tixm, a
     
 }
 
-   matrix = matrixGenerator(20, 25, 30, 35, 40, 45, 50, 55, 60)
+   matrix = matrixGenerator(20, 20, 30, 50, 40, 50, 55, 35,)
 
 
     io.sockets.emit('send matrix', matrix)
