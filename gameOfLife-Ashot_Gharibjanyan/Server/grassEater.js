@@ -32,8 +32,8 @@ module.exports = class GrassEater extends LivingCreature {
             if (this.multiply >= 5 && newCell) {
                 let x = newCell[0]
                 let y = newCell[1]
-                let ge = new GrassEater(x, y, 2)
-                grassEater.push(ge)
+                let grEater = new GrassEater(x, y, 2)
+                grassEaterArr.push(grEater)
                 this.multiply = 0;
             }
         }
@@ -57,7 +57,7 @@ module.exports = class GrassEater extends LivingCreature {
             this.energy++;
 
             if (this.energy >= 12) {
-                console.log(this.energy);
+
                 this.mul();
             }
 

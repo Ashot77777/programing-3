@@ -14,7 +14,7 @@ let dzunColor = "white"
 
 
 function setup() {
-    frameRate(30)
+    frameRate(60)
     createCanvas(20 * side, 20 * side);
     background("#acacac");
 }
@@ -31,7 +31,7 @@ function drawGame(matrix) {
                 rect(x * side, y * side, side, side);
                 text('🌿', x * side, y * side + toBot);
 
-            
+
             } else if (matrix[y][x] == 2) {
                 fill(grassEaterColor)
                 rect(x * side, y * side, side, side);
@@ -54,77 +54,88 @@ function drawGame(matrix) {
                 rect(x * side, y * side, side, side);
                 text('☀️', x * side, y * side + toBot);
 
-            }else if (matrix[y][x] == 7) {
+            } else if (matrix[y][x] == 7) {
                 fill(dzunColor)
                 rect(x * side, y * side, side, side);
                 text('❄️', x * side, y * side + toBot);
 
-            }else {
+            } else {
                 fill("gray")
                 rect(x * side, y * side, side, side)
             }
-             
+
 
 
 
 
         }
 
-        
+
     }
 }
 
 setInterval(
     function () {
-    socket.on('send matrix', drawGame)
-    },1000
+        socket.on('send matrix', drawGame)
+    }, 1000
 )
 let buttonSp = document.getElementById("SpElement");
 buttonSp.addEventListener("click", handlerSpringClick)
 
-function handlerSpringClick(){
-    grassColor = "#207C10"
-    grassEaterColor = "orange"
-    predatorColor = "pink"
-    waterColor = "00FEF3"
-    tixmColor = "grey"
-    arevColor = "yellow"
-    dzunColor = "black"
+function handlerSpringClick() {
 
-    // socket.emit("Spring")
+    grassColor = "green"
+    grassEaterColor = "green"
+    predatorColor = "green"
+    waterColor = "green"
+    tixmColor = "green"
+    arevColor = "yellow"
+    dzunColor = "green"
+
+
+    socket.emit("Spring")
 }
 
 let buttonSm = document.getElementById("SmElement");
-buttonSp.addEventListener("click", handlerSummerClick)
+buttonSm.addEventListener("click", handlerSummerClick)
 
-function handlerSummerClick(){
-    grassColor = "green"
-    grassEaterColor = "orange"
-    predatorColor = "FF0000"
-    waterColor = "5188E1"
-    tixmColor = "595B5B"
+function handlerSummerClick() {
+
+    grassColor = "red"
+    grassEaterColor = "red"
+    predatorColor = "red"
+    waterColor = "red"
+    tixmColor = "red"
     arevColor = "orange"
-    dzunColor = "grey"
+    dzunColor = "red"
+
+
+    socket.emit("Summer")
 }
 
 
 let buttonAu = document.getElementById("AuElement");
-buttonSp.addEventListener("click", handlerAutumnClick)
+buttonAu.addEventListener("click", handlerAutumnClick)
 
-function handlerAutumnClick(){
+function handlerAutumnClick() {
+
+
     grassColor = "orange"
     grassEaterColor = "orange"
     predatorColor = "orange"
-    waterColor = "blue"
+    waterColor = "orange"
     tixmColor = "orange"
     arevColor = "yellow"
-    dzunColor = "white"
+    dzunColor = "orange"
+
+
+    socket.emit("Autumn")
 }
 
 let buttonWn = document.getElementById("WnElement");
-buttonSp.addEventListener("click", handlerWinterClick)
+buttonWn.addEventListener("click", handlerWinterClick)
 
-function handlerWinterClick(){
+function handlerWinterClick() {
     grassColor = "whitr"
     grassEaterColor = "white"
     predatorColor = "white"
@@ -132,4 +143,30 @@ function handlerWinterClick(){
     tixmColor = "white"
     arevColor = "orange"
     dzunColor = "white"
+
+    socket.emit("Winter")
+}
+
+let buttonVr = document.getElementById("VrElement");
+buttonVr.addEventListener("click", handlerVirusClick)
+
+function handlerVirusClick() {
+    grassColor = "black"
+    grassEaterColor = "black"
+    predatorColor = "black"
+    waterColor = "black"
+    tixmColor = "black"
+    arevColor = "black"
+    dzunColor = "black"
+
+    socket.emit("Virus")
+}
+
+let buttonLb = document.getElementById("LbElement");
+buttonLb.addEventListener("click", handlerLightningBoltClick)
+
+function handlerLightningBoltClick() {
+  
+
+    socket.emit("LightningBolt")
 }

@@ -2,11 +2,10 @@ let LivingCreature = require('./livingCreature')
 
 module.exports = class Water extends LivingCreature {
     constructor(x, y) {
-        // this.x = x
-        //  this.y = y
+       
         super(x, y)
         this.energy = 50
-        // this.directions = []
+       
     }
 
 
@@ -26,32 +25,7 @@ module.exports = class Water extends LivingCreature {
         this.getNewCoordinates();
         return super.chooseCell(char)
     }
-    // chooseCell(char, char1) {
-    //     this.getNewCoordinates();
-    //     let found = [];
-
-    //     for (let i in this.directions) {
-    //         let x = this.directions[i][0];
-    //         let y = this.directions[i][1];
-
-    //         if (y < matrix.length && y >= 0 && x < matrix[0].length && x >= 0) {
-    //             if (matrix[y][x] == char) {
-    //                 found.push(this.directions[i]);
-    //             }
-    //         }
-
-    //         if (y < matrix.length && y >= 0 && x < matrix[0].length && x >= 0) {
-    //             if (matrix[y][x] == char1) {
-    //                 found.push(this.directions[i]);
-    //             }
-    //         }
-
-
-    //     }
-    //     return found;
-    // }
-
-
+    
     
     mul() {
         this.multiply++;
